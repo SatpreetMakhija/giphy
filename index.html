@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+        <style>
+            img {
+                margin-top: 50px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+                height: 50%;
+            }
+
+
+        </style>
+
+        <input type="text" id="imgName" placeholder="what you want, huh?">
+        <input type="button" id="get-new-image" value="Click to get new image">
+        <img src="https://media1.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif?cid=4…12294570d7af2ac4a8aa7a850847fc2765356fce3&rid=giphy.gif&ct=g">
+        <script>
+            const img = document.querySelector('img');
+            
+            function getImage() {
+
+                var imgName = document.querySelector("#imgName").value;
+               
+                
+
+                fetch('https://api.giphy.com/v1/gifs/translate?api_key=GSUds3jsDe8bv2rLS9J6ayPP4mt7XSjT&s='+ imgName, {mode: 'cors'})
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response){
+                    img.src = response.data.images.original.url;
+                    console.log(response.data.images.original.url)
+                })
+                .catch(function(e){
+                    alert("No image found!")
+                });
+            };
+
+
+            
+           
+            
+            
+            
+            var getImgBtn = document.querySelector("#get-new-image");
+            getImgBtn.addEventListener("click", getImage)
+
+            
+                
+        </script>
+    </body>
+</html>
